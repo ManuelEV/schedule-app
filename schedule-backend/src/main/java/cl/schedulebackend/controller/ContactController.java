@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 
@@ -38,7 +37,7 @@ public class ContactController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Contact> getById(@PathVariable("id") Long id) {
+    public ResponseEntity<Contact> getOneById(@PathVariable("id") Long id) {
 
         Optional<Contact> optionalContact = contactRepository.findById(id);
 
