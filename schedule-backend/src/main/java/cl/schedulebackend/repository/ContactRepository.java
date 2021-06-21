@@ -1,14 +1,13 @@
 package cl.schedulebackend.repository;
 
 import cl.schedulebackend.model.Contact;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 
 import java.util.List;
 
-public interface ContactRepository extends PagingAndSortingRepository<Contact, Long> {
+public interface ContactRepository extends JpaRepository<Contact, Long> {
 
-    List<Contact> findAllByName(String name, Pageable pageable);
+    List<Contact> findAllByScheduleId(Long id);
 
 }

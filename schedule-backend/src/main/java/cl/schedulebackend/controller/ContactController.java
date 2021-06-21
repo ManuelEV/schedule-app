@@ -14,8 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "*")
 @Controller
 @RequestMapping("/api/contacts")
 public class ContactController {
@@ -27,13 +29,16 @@ public class ContactController {
     private ScheduleRepository scheduleRepository;
 
     @GetMapping
-    public ResponseEntity<Page<Contact>> getAll() {
+    public ResponseEntity<List<Contact>> getAllByScheduleId(@RequestParam("scheduleId") Long scheduleId) {
 
-        Pageable firstPageWithFiveElements = PageRequest.of(0, 5);
+        Optional<Schedule> optionalSchedule = scheduleRepository.findById(scheduleId);
 
-        Page<Contact> allContacts = contactRepository.findAll(firstPageWithFiveElements);
+        if (optionalSchedule.isPresent()) {
+            List<Contact> contacts = contactRepository.findAllByScheduleId(scheduleId);
+            return new ResponseEntity<>(contacts, HttpStatus.OK);
+        }
 
-        return new ResponseEntity<>(allContacts, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("{id}")
