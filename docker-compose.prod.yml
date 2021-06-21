@@ -11,6 +11,8 @@ services:
      - '80'
     depends_on:
       - backend_prod
+    links:
+      - backend_prod:backend
 
   database_prod:
     image: mysql:5.7
