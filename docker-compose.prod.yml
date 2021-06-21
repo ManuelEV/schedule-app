@@ -9,15 +9,25 @@ services:
      - '80:80'
     expose:
      - '80'
+    depends_on:
+      - backend_prod
+    networks:
+      - frontend 
 
   database_prod:
     image: mysql:5.7
     restart: on-failure
+    ports:
+      - "3306:3306"
     environment:
       - "MYSQL_DATABASE=schedule-app"
       - "MYSQL_USER=root"
       - "MYSQL_PASSWORD=root"
       - "MYSQL_ROOT_PASSWORD=root"
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - backend
 
   backend_prod:
     build:
@@ -28,5 +38,17 @@ services:
       - '8080:8080'
     expose:
       - '8080'
-    links:
-      - database_prod:mysql
+    depends_on: 
+      - database_prod
+    networks:
+      - backend
+      - frontend
+
+# Volumes
+volumes:
+  db-data:
+
+# Networks to be created to facilitate communication between containers
+networks:
+  backend:
+  frontend:
