@@ -3,7 +3,7 @@ version: '3.4'
 services:
   frontend_prod:
     build:
-      context: Frontend
+      context: schedule-frontend
       dockerfile: prod.dockerfile
     ports:
      - '80:80'
@@ -14,14 +14,14 @@ services:
     image: mysql:5.7
     restart: on-failure
     environment:
-      - "MYSQL_DATABASE=trackthor"
+      - "MYSQL_DATABASE=schedule-app"
       - "MYSQL_USER=root"
       - "MYSQL_PASSWORD=root"
       - "MYSQL_ROOT_PASSWORD=root"
 
   backend_prod:
     build:
-      context: Backend
+      context: schedule-backend
       dockerfile: prod.dockerfile
     working_dir: /usr/src/java-code
     ports:
