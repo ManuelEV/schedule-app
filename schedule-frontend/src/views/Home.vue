@@ -1,18 +1,30 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <layout-default>
+    <span class="text-2xl font-bold ml-5">
+      Lista de agendas
+    </span>
+    <schedules-cards-wrapper />
+  </layout-default>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
+
+import LayoutDefault from '@/components/layouts/LayoutDefault.vue';
+import SchedulesCardsWrapper from '@/components/wrappers/SchedulesCardsWrapper.vue';
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld,
+    LayoutDefault,
+    SchedulesCardsWrapper,
+  },
+  data() {
+    return {
+    };
+  },
+  created() {
+  },
+  methods: {
   },
 };
 </script>
