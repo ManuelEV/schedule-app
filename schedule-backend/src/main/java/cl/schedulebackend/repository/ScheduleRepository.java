@@ -12,7 +12,7 @@ import java.util.List;
 @RepositoryRestResource(excerptProjection = CustomSchedule.class)
 public interface ScheduleRepository extends CrudRepository<Schedule, Long> {
 
-    @Query(value = "SELECT id, title, description FROM SCHEDULES", nativeQuery = true)
+    @Query(value = "SELECT id, title, description FROM schedules", nativeQuery = true)
     List<CustomSchedule> findAllCustomQuery();
 
 }
