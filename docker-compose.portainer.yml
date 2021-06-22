@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  # Portainer
+  portainer:
+    image: portainer/portainer
+    container_name: portainer_fiware
+    restart: on-failure
+    ports:
+      - "9999:9000"
+      - "8008:8081"
+    volumes:
+      - type: volume
+        source: vol_portainer_data
+        target: /data
+      - type: bind
+        source: /usr/bin/docker
+        target: /usr/bin/docker
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+
+
+volumes:
+  vol_portainer_data:
